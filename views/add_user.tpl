@@ -6,7 +6,7 @@
   <p>Student Id:<input name="studentId"/></p>
   <p>User Role: </p>
   <select name="userRoleId">
-  <option value="">None</option>
+  <option value="none">None</option>
   % for role in roles:
     <option value="{{role.id}}">{{role.name}}</option>
   % end

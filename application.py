@@ -8,11 +8,6 @@ def get_users():
     users = database.get_users()
     return template("list_user.tpl", users=users)
 
-@route("/show/<id>")
-def show_user(id):
-    users = database.get_users(id)
-    return template("show_user.tpl", user=users[0])
-
 @route("/add")
 def get_add_user():
     roles = database.get_user_roles()
@@ -28,9 +23,10 @@ def post_add_user():
 
 @route("/update/<id>")
 def get_update_user(id):
-    users = database.get_users(id)
+    users = database.get_users(id)[0]
     roles = database.get_user_roles()
-    return template("update_user.tpl", user=users[0], roles=roles)
+    userRoleId = users.userRoles.id if users.userRoles else ''
+    return template("update_user.tpl", user=users, roles=roles, userRoleId=userRoleId)
 
 @post("/update")
 def post_update_user():
@@ -57,11 +53,6 @@ def get_user_roles():
         roles = database.get_user_roles()
         query = ''
     return template("list_user_role.tpl", roles=roles, query=query)
-
-@route("/user-role/show/<id>")
-def show_user(id):
-    roles = database.get_user_roles(id)
-    return template("show_user_role.tpl", role=roles[0])
 
 @route("/user-role/add")
 def get_add_user_role():

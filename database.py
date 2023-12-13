@@ -58,14 +58,17 @@ def get_filtered_user(query):
     return users
 
 def add_user(name, studentId, userRoleId):
-    user = User(name=name, studentId=studentId, userRoles=userRoleId)
+    user = User(name=name, studentId=studentId)
+    if(userRoleId != 'none'):
+        user.userRoles = userRoleId
     user.save()
 
 def update_user(id, name, studentId, userRoleId):
     user = User.select().where(User.id == id).get()
     user.name = name
     user.studentId = studentId
-    user.userRoles = userRoleId
+    if(userRoleId != 'none'):
+        user.userRoles = userRoleId
     user.save()
 
 def delete_user(id):

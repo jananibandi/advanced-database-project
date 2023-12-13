@@ -7,7 +7,9 @@
   <tr>
     <td>{{str(user.name)}}</td>
     <td>{{str(user.studentId)}}</td>
-    <td>{{user.userRoles.name}}</td>
+    % if(user.userRoles):
+      <td>{{user.userRoles.name}}</td>
+    % end
     <td><a href="/update/{{str(user.id)}}">update</a></td>
     <td><a href="/delete/{{str(user.id)}}">delete</a></td>
   </tr>
